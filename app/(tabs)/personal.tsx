@@ -13,22 +13,24 @@ import {
 } from 'react-native';
 import { useNotes } from '../../context/NotesContext';
 
-export default function AllNotesScreen() {
+export default function PersonalNotesScreen() {
   const { notes, isLoading, deleteNote, sortNotes } = useNotes();
   const router = useRouter();
+  const [personalNotes, setPersonalNotes] = useState(notes);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredNotes, setFilteredNotes] = useState(notes);
+  const [filteredNotes, setFilteredNotes] = useState(personalNotes);
   const [sortBy, setSortBy] = useState<'dateAdded' | 'dateEdited'>('dateAdded');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
   useEffect(() => {
-    const sorted = sortNotes(sortBy, sortOrder);
+    const personal = notes.filter(note => note.category.toLowerCase() === 'personal');
+    const sorted = sortNotes(sortBy, sortOrder).filter(note => note.category.toLowerCase() === 'personal');
+    setPersonalNotes(sorted);
     
     if (searchQuery) {
       const filtered = sorted.filter(note => 
         (note.title && note.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        note.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        note.category.toLowerCase().includes(searchQuery.toLowerCase())
+        note.content.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredNotes(filtered);
     } else {
@@ -52,15 +54,6 @@ export default function AllNotesScreen() {
     return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
-  const getCategoryColor = (category: string) => {
-    switch (category.toLowerCase()) {
-      case 'work': return '#FF9500';
-      case 'study': return '#34C759';
-      case 'personal': return '#007AFF';
-      default: return '#8E8E93';
-    }
-  };
-
   const renderNote = ({ item }: { item: any }) => (
     <TouchableOpacity
       style={styles.noteCard}
@@ -70,8 +63,8 @@ export default function AllNotesScreen() {
         <Text style={styles.noteTitle} numberOfLines={1}>
           {item.title || 'Untitled'}
         </Text>
-        <View style={[styles.categoryBadge, { backgroundColor: getCategoryColor(item.category) }]}>
-          <Text style={styles.categoryText}>{item.category}</Text>
+        <View style={styles.categoryBadge}>
+          <Text style={styles.categoryText}>Personal</Text>
         </View>
       </View>
       <Text style={styles.noteContent} numberOfLines={3}>
@@ -102,41 +95,13 @@ export default function AllNotesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>All Notes</Text>
+        <Text style={styles.headerTitle}>Personal Notes</Text>
         <TextInput
           style={styles.searchInput}
-          placeholder="Search notes..."
+          placeholder="Search personal notes..."
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
-        <View style={styles.sortContainer}>
-          <TouchableOpacity
-            style={[styles.sortButton, sortBy === 'dateAdded' && styles.sortButtonActive]}
-            onPress={() => setSortBy('dateAdded')}
-          >
-            <Text style={[styles.sortButtonText, sortBy === 'dateAdded' && styles.sortButtonTextActive]}>
-              Date Added
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.sortButton, sortBy === 'dateEdited' && styles.sortButtonActive]}
-            onPress={() => setSortBy('dateEdited')}
-          >
-            <Text style={[styles.sortButtonText, sortBy === 'dateEdited' && styles.sortButtonTextActive]}>
-              Date Edited
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.orderButton, sortOrder === 'asc' && styles.orderButtonActive]}
-            onPress={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-          >
-            <Ionicons 
-              name={sortOrder === 'asc' ? 'arrow-up' : 'arrow-down'} 
-              size={16} 
-              color={sortOrder === 'asc' ? '#007AFF' : '#666'} 
-            />
-          </TouchableOpacity>
-        </View>
       </View>
 
       <FlatList
@@ -146,9 +111,9 @@ export default function AllNotesScreen() {
         contentContainerStyle={styles.notesList}
         ListEmptyComponent={
           <View style={styles.emptyState}>
-            <Ionicons name="document-text-outline" size={64} color="#ccc" />
+            <Ionicons name="person-outline" size={64} color="#ccc" />
             <Text style={styles.emptyText}>
-              {searchQuery ? 'No notes found' : 'No notes yet. Create your first note!'}
+              {searchQuery ? 'No personal notes found' : 'No personal notes yet. Create your first personal note!'}
             </Text>
           </View>
         }
@@ -193,47 +158,6 @@ const styles = StyleSheet.create({
     padding: 12,
     fontSize: 16,
     backgroundColor: '#f9f9f9',
-    marginBottom: 15,
-  },
-  sortContainer: {
-    flexDirection: 'row',
-    gap: 10,
-    alignItems: 'center',
-  },
-  sortButton: {
-    flex: 1,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: '#f9f9f9',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    alignItems: 'center',
-  },
-  sortButtonActive: {
-    backgroundColor: '#007AFF',
-    borderColor: '#007AFF',
-  },
-  sortButtonText: {
-    fontSize: 12,
-    color: '#666',
-    fontWeight: '500',
-  },
-  sortButtonTextActive: {
-    color: 'white',
-  },
-  orderButton: {
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: '#f9f9f9',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 40,
-  },
-  orderButtonActive: {
-    backgroundColor: '#007AFF',
-    borderColor: '#007AFF',
   },
   notesList: {
     padding: 15,
@@ -262,6 +186,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   categoryBadge: {
+    backgroundColor: '#AF52DE',
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 12,
