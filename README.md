@@ -1,52 +1,152 @@
 <img src="https://socialify.git.ci/Shantela21/-React-Native-Notes-Application/image?language=1&owner=1&name=1&stargazers=1&theme=Light" alt="-React-Native-Notes-Application" width="640" height="320" />
+# 📝 React Native Notes Application
 
-# Welcome to your Expo app 👋
+A simple yet powerful **Notes App** built with **React Native and Expo Router**, allowing users to create, store, and manage notes securely on their device.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+---
 
-## Get started
+## 🚀 Features
 
-1. Install dependencies
+* 📝 Create, edit, and delete notes
+* 💾 Persistent storage using AsyncStorage
+* 🔐 Secure data handling with Expo SecureStore
+* 📱 Clean and responsive mobile UI
+* ⚡ Fast navigation with Expo Router
+* 🎨 Smooth animations using Reanimated
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 🛠️ Tech Stack
 
-   ```bash
-   npx expo start
-   ```
+* React Native (0.81.5)
+* React (19.1.0)
+* Expo SDK 54
+* Expo Router
+* TypeScript
+* AsyncStorage (local storage)
+* Expo SecureStore (secure storage)
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📂 Project Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+```bash
+react-native-notes-application/
+│── app/                # Screens (Expo Router)
+│── components/         # Reusable components
+│── assets/             # Images & fonts
+│── scripts/            # Utility scripts
+│── package.json
+│── tsconfig.json
+```
 
-## Get a fresh project
+---
 
-When you're ready, run:
+
+## 📁 Adding Screenshots
+
+1. Create a folder:
+
+```bash
+assets/screenshots/
+```
+
+2. Add images:
+
+```bash
+home.png
+create.png
+edit.png
+```
+
+3. Ensure filenames match the README.
+
+---
+
+## 📦 Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/react-native-notes-application.git
+cd react-native-notes-application
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+---
+
+## ▶️ Running the App
+
+Start the development server:
+
+```bash
+npm run start
+```
+
+Run on platforms:
+
+```bash
+npm run android
+npm run ios
+npm run web
+```
+
+---
+
+## 🔄 Reset Project
 
 ```bash
 npm run reset-project
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 🧹 Linting
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm run lint
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## ⚙️ TypeScript Config
 
-Join our community of developers creating universal apps.
+* Strict mode enabled ✅
+* Path alias:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```ts
+@/* → root directory
+```
+
+---
+
+## 📌 Key Dependencies
+
+* @react-native-async-storage/async-storage – Local data storage
+* expo-secure-store – Secure storage for sensitive data
+* expo-router – File-based navigation
+* react-native-reanimated – Animations
+* react-native-screens – Performance optimization
+
+---
+
+## 📱 Supported Platforms
+
+* ✅ Android
+* ✅ iOS
+* ✅ Web
+
+---
+
+## 👨‍💻 Author
+
+**Shantela Silindile Noyila**
+
+---
+
+
