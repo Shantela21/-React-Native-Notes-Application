@@ -1,4 +1,6 @@
 <img src="https://socialify.git.ci/Shantela21/-React-Native-Notes-Application/image?language=1&owner=1&name=1&stargazers=1&theme=Light" alt="-React-Native-Notes-Application" width="640" height="320" />
+
+
 ## 📝 React Native Notes Application
 
 A simple yet powerful **Notes App** built with **React Native and Expo Router**, allowing users to create, store, and manage notes securely on their device.
